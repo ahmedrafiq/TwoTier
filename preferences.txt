@@ -1,0 +1,13 @@
+customer_fields_order||
+edit_text||false
+fields_to_show||
+loggedin_customer_footer_links||add,redeem,balance,myinfo
+loggedin_customer_top_nav||add,redeem,balance,myinfo
+loggedin_footer_links||home,rules,activate_account,new_account,logout
+loggedin_top_nav||home,activate_account,new_account,reports,logout
+notification_email||
+public_footer_links||login,new_account_how
+public_top_nav||login,new_account_how
+redeem_type||rewards
+transaction_fields_order||
+transaction_fields_to_show||

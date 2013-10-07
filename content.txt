@@ -1,0 +1,141 @@
+activate_label_account_code||Card Number
+activate_title||Register a New Customer
+add_amount_label||Amount:
+add_buyx_item_label||Choose Item:
+add_promotion_label||Promotion:
+add_section_title_buyx||Record Items
+add_section_title_earned||Add Event
+add_section_title_events||Record Event
+add_section_title_giftcard||Add to Balance
+add_section_title_points||Record Purchase
+admin_preferences_campaigns_to_show||Campaigns to show:
+admin_preferences_custom_fields_customer_order||Customer data fields
+admin_preferences_custom_fields_instructions||Click and drag to reorder the fields:
+admin_preferences_custom_fields_transaction_order||Transaction data fields
+admin_preferences_email_notification||The email address to send redemption orders to:
+admin_preferences_header||Site Preferences
+admin_preferences_loggedin_customer_footer_nav||Logged-in Customer Footer
+admin_preferences_loggedin_customer_top_nav||Logged-in Customer Top Nav
+admin_preferences_loggedin_footer_nav||Footer Links: Logged-In
+admin_preferences_loggedin_top_nav||Nav Bar: Logged-In
+admin_preferences_public_footer_nav||Footer Links: Not Logged-In
+admin_preferences_public_top_nav||Nav Bar: Not Logged-In
+admin_preferences_text_edit||Turn on Text Editing:
+balance_box_header_plural||Current Balances
+balance_box_header_singular||Current Balance
+balance_heading_trans_history||Customer Transaction History
+balance_label_balance||Balance
+balance_label_no_campaign||No Campaign
+balance_msg_no_balance||No Balance
+choose_customer_header||Choose Customer
+configuration_incorrect||Unable to connect to account.
+confirm_address_header||Address to Ship To:
+confirm_address_text||Make sure this is the correct address to ship this item to, if applicable.
+confirm_product_header||Item Selected
+confirm_product_text||This is the item you have selected as a reward.
+confirm_redeem_title||Please confirm your order details
+customer_not_found||Customer not found.
+error_add_transaction||Error adding the transaction.
+error_missing_address||Error: Missing address information.<br>Please make sure all relevant address parts are entered.
+error_update_customer||Error updating the address on file.<br>Please make sure there are not mistakes in the address, and try again.
+error_update_customer_short||Error updating customer record.
+footer_contact_content||<ul>[|]	<li>ACME Inc.</li>[|]	<li>info@acmeinc.com</li>[|]	<li>800-555-7842</li>[|]</ul>
+footer_contact_title||Contact Headquarters
+footer_section_left_content||Copyrighted &copy; 2010 - ACME Inc.
+footer_sitemap_title||Site Map
+how_to_be_a_member_content||Replace this text with your program's details and perhaps the basic instructions for your staff.<br><br><br><br><br><br><br><br><br><br><br><br>
+how_to_be_a_member_sidebar||<IMG style="PADDING-BOTTOM: 0px; PADDING-LEFT: 25px; PADDING-RIGHT: 25px; PADDING-TOP: 0px" border=0 src="images/girls.png">
+how_to_be_a_member_title||Support for Store Staff
+label_event||event
+label_events||events
+label_needs||Needs
+label_point||point
+label_points||points
+label_user||User
+login_admin_section_header||Admin Login
+login_incorrect||Incorrect Login
+login_section_admin||Username
+login_section_header||Login:
+login_section_password||Password
+login_section_submit||Submit
+login_section_username||Employee
+login_title||Login
+myinfo_error_access_info||Error accessing your information
+myinfo_error_duplicate_card_number||This card number already exists
+myinfo_error_first_name_required||Your first name is required
+myinfo_error_last_name_required||A customer last name is required
+myinfo_error_no_card_number||A membership ID is required
+myinfo_error_no_transactions||No Transactions
+myinfo_error_password_required||A password is required
+myinfo_error_passwords_no_match||Passwords do not match!
+myinfo_label_address||Address
+myinfo_label_card_number||Card Number
+myinfo_label_change_password||Change password (Optional)
+myinfo_label_change_password2||Verify changed password
+myinfo_label_city||City
+myinfo_label_client||Client
+myinfo_label_country||Country
+myinfo_label_date||Date
+myinfo_label_day||Day
+myinfo_label_email||Email Address
+myinfo_label_firstname||First Name
+myinfo_label_lastname||Last Name
+myinfo_label_month||Month
+myinfo_label_new_password||Choose a Password
+myinfo_label_new_password2||Confirm password
+myinfo_label_phone||Phone Number
+myinfo_label_state||State
+myinfo_label_year||Year
+myinfo_label_zip||Postal Code
+myinfo_title||Customer Details
+myinfo_title_updated||Customer Updated
+nav_create_account||Add New Card
+nav_item_activate_account||Register Card
+nav_item_add||Add
+nav_item_admin_logged_in||Site Preferences
+nav_item_admin_login||Admin Login
+nav_item_admin_logout||Admin Logout
+nav_item_balance||Customer History
+nav_item_home||Find Customer
+nav_item_login||Login
+nav_item_logout||Logout
+nav_item_myinfo||Customer Info
+nav_item_new_account||Add Customer
+nav_item_reports||Reports
+nav_item_new_account_how||Help
+nav_item_redeem||Redeem
+nav_item_rules||Rules
+nav_item_selected_customer||Add
+nav_login||login
+optional||Optional
+quantity_label||How many purchased?
+redeem_deduct||Deduct
+redeem_no_rewards_avail||No rewards available.<br><br><br><br><br><br><br><br><br><br>
+redeem_result_success_title||Order Successful
+redeem_section_title||Available Rewards
+redeem_shipped_address_header||Shipping Address
+redeem_shipped_address_text||This is the address this item is being sent to:
+redeem_shipped_header||Item Shipped
+redeem_shipped_text||This is the item that is being shipped:
+redeem_type_setting_header||Redemption choices for Points campaigns
+redeem_type_setting_money||Monetary Equivalent
+redeem_type_setting_points||Amount of Points
+redeem_type_setting_rewards||List of Rewards
+rules_content||Place the program rules for reference in this space.<br><br><br>
+rules_title||Program Rules
+send_email_label||Send Email Receipt?
+send_email_yes||Yes
+success_add_transaction||Transaction Added
+success_preferences_updated||Preferences Updated
+top_bar_upper_left||Welcome
+top_bar_upper_right||<a href="mailto:info@acmeinc.com">info@acmeinc.com</a> | 800-555-7842
+transaction_description||Description:
+transaction_error_type_date||Invalid date
+transaction_error_type_item||Invalid item
+transaction_error_type_list||One or more of the choices is invalid
+transaction_error_type_monetary||Must be a monetary amount
+transaction_error_type_number||Must be a number
+transaction_error_type_pick||Invalid choice
+transaction_error_type_points||An amount or a promotion must be selected
+welcome_header||Scan Customer Card
+welcome_message||Welcome to your Rewards Program personal page.<br>[|]<br>[|]<p align="center">NEWS for Member ID: demo</p>[|]<br>[|]Checkout the new rewards for those with 5000 points or more!

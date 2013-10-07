@@ -1,0 +1,25 @@
+#editor_box { /* CSS for pop up edit box */
+	position:absolute;
+	top: 0;
+	background-color: #f0f0f0;
+	width: 250px; /* Default width of edit box.*/
+	padding: 5px;
+	border:1px solid #303030;
+	font-size: 11px;
+	z-index:100;
+	visibility: hidden;
+}
+
+.edit_link { /* For element that shows edit box onMouseOver */
+
+}
+
+.edit_textbox {
+	font-size: 13px;
+	margin-right: 10px;
+}
+
+textarea {
+	margin: 0px 5px 0px 0px;
+	padding: 2px;
+}
