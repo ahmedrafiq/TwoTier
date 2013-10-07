@@ -1,0 +1,44 @@
+------------------
+QUICK INSTRUCTIONS
+------------------
+
+1) Modify the configuration.php with the proper API credentials. 
+   Instructions on api_user (user_id) and api_key (user_password) 
+   are at:
+        http://api.clienttoolbox.com
+
+2) Modify the configuration.php with your own admin credentials. 
+   Just replace the filler "admin" and "password" with your own 
+   username and password.
+
+3) Copy the contents of this folder to the folder where the site will 
+   be live.
+
+4) IMPORTANT: Give the *.txt files (content.txt, preferences.txt) 
+   full writeable permissions by the web server process (usually, 
+   660 or 775 will do.)
+
+
+That's it! See? Simple!
+
+
+
+NOTE & DISCLAIMER: 
+-----------------
+
+- This code is for demonstration purposes of how to implement a front 
+end interface using the API. 
+
+- Feel free to explore it, modify it, poke it, break it, copy it, 
+resell it, publish it or make use of it anyway you see fit.  However, 
+we do not support any modifications or customization of this code. 
+
+- We do not provide any support for questions regarding styling (CSS) 
+nor layout (HTML) except for any questions or reporting of bugs 
+related to the API. 
+
+- We make no representations or guarantees as to the stability, 
+correctness, or accuracy of the data entered using this code. IF YOU 
+PLAN TO USE THIS CODE FOR PRODUCTION PURPOSES, WE ASSUME NO LIABILITY 
+FOR ANY ERRORS OR OMISSIONS RESULTING FROM IT. THIS CODE IS PROVIDED 
+"AS-IS" WITHOUT ANY WARRANTIES.
