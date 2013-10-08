@@ -1225,9 +1225,21 @@ function Show_Reports() {
 	{
 		find_customer ();
 	}
-	date_default_timezone_set("Etc/GMT+4");
-	//echo date('Y-m-d H:i:s', mktime(date('H'), date('i')-10, date('s'), date('m'), date('d'), date('Y')));
-	
+	$timezone_array = get_timezone_array();
+	$account_info = json_decode(json_encode(account_info_api()), true);
+	if($account_info['@attributes']['status'] == 'success')
+	{
+		$timezone_key = $account_info['account']['timezone'];
+		if(isset($timezone_array[$timezone_key]))
+		{
+			date_default_timezone_set($timezone_array[$timezone_key]['php_timezone']);
+		}
+	}
+	else
+	{
+		date_default_timezone_set("Etc/GMT+4");
+	}
+		
 	$campaign_list_array = json_decode(json_encode($GLOBALS['campaigns_list']), true);
 	$customers_list_array = json_decode(json_encode($GLOBALS['customer_search_results']), true);
 	$campaigns_to_be_excluded = $GLOBALS['custom_campaigns_excluded_ids'];
@@ -1308,9 +1320,6 @@ function Show_Reports() {
 			}
 			
 			
-			/*list($campaign_customers_array_raw, $campaign_id) = get_campaign_customers($campaign_list_array, $customers_list_array, $campaign_customers_array, $campaign_id);
-			$campaign_customers_array = campaign_customers_array_build($campaign_customers_array_raw, $default_contribution_percentage, $contribution_percentage_array, date('Y-m-d', $report_cutoff_timestamp));*/
-			
 			list($campaign_customers_array_raw, $campaign_id_new) = get_campaign_transactions($campaign_list_array, $campaign_id, '2013-09-23');
 			$campaign_customers_array = build_campaign_transactions_array($campaign_customers_array_raw, $default_contribution_percentage, $contribution_percentage_array, $report_cutoff_timestamp);
 			
@@ -1318,11 +1327,15 @@ function Show_Reports() {
 			$invoice_amount = $campaign_customers_array[$campaign_id]['invoice_amount'];
 			$transactions_rows = $campaign_customers_array[$campaign_id]['transactions_rows'];
 			
+			/*$curr_date = date('Y-m-d H:i:s', mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y')));
+			$report_page_html .= $curr_date;*/
+			
 			$query = $db->exec('CREATE TABLE report_time (`id` int(11) NOT NULL, cut_off_time varchar(50) DEFAULT NULL, PRIMARY KEY (`id`))');
 			//$query = $db->exec("UPDATE report_time SET cut_off_time = '".date('Y-m-d H:i:s', mktime(date('H'), date('i')-10, date('s'), date('m'), date('d'), date('Y')))."'");
 			if($sub_action == 'run_reports')
 			{
-				$curr_date = date('Y-m-d H:i:s', mktime(date('H'), date('i')-10, date('s'), date('m'), date('d'), date('Y')));
+				//$curr_date = date('Y-m-d H:i:s', mktime(date('H'), date('i')-10, date('s'), date('m'), date('d'), date('Y')));
+				$curr_date = date('Y-m-d H:i:s', mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y')));
 				$curr_date_file_name = date('Y-m-d H i s', strtotime($curr_date));
 				
 				$result = $db->query("SELECT * FROM report_time");
@@ -1333,12 +1346,7 @@ function Show_Reports() {
 				}
 				$campaign_customers_array = build_campaign_transactions_array($campaign_customers_array_raw, $default_contribution_percentage, $contribution_percentage_array, $report_cutoff_timestamp);
 				
-				/*$report_page_html .= '<pre>';
-				$report_page_html .= print_r($campaign_customers_array, true);
-				$report_page_html .= '</pre>';
-				echo $report_page_html;
-				exit;*/
-				
+								
 				$query = $db->exec("INSERT INTO report_time (`id`, cut_off_time) VALUES ('1', '".$curr_date."')");
 				$query = $db->exec("UPDATE report_time SET cut_off_time = '".$curr_date."'");
 				
@@ -1381,7 +1389,7 @@ function Show_Reports() {
 			{
 				$report_cutoff_timestamp = strtotime($response['cut_off_time']);
 			}
-			/*$campaign_customers_array = campaign_customers_array_build($campaign_customers_array_raw, $default_contribution_percentage, $contribution_percentage_array, date('Y-m-d', $report_cutoff_timestamp));*/
+			
 			$campaign_customers_array = build_campaign_transactions_array($campaign_customers_array_raw, $default_contribution_percentage, $contribution_percentage_array, $report_cutoff_timestamp);
 			
 			$total_spent = $campaign_customers_array[$campaign_id]['total_amount_spent'];
@@ -1434,13 +1442,15 @@ function Show_Reports() {
 			
 			$report_page_html .= '<div class="vertical_tab_content left">';	
 				/*$report_page_html .= '<pre>';
+				$report_page_html .= print_r($timezone_array, true);
+				$report_page_html .= '</pre>';*/
+				
+				/*$report_page_html .= '<pre>';
 				$report_page_html .= print_r($campaign_customers_array, true);
 				$report_page_html .= '</pre>';*/
 				
 				if($campaign_id == $GLOBALS['master_campaign_id'])
 				{
-					/*list($campaign_customers_array_raw, $campaign_id) = get_campaign_customers($campaign_list_array, $customers_list_array, $campaign_customers_array, $campaign_id, true);
-					$campaign_customers_array = campaign_customers_array_build($campaign_customers_array_raw, $default_contribution_percentage, $contribution_percentage_array, '', true);*/
 					list($campaign_customers_array_raw, $campaign_id_new) = get_campaign_transactions($campaign_list_array, $campaign_id, '2013-09-23', true);
 					$campaign_customers_array = build_campaign_transactions_array($campaign_customers_array_raw, $default_contribution_percentage, $contribution_percentage_array, '', true);
 					
@@ -1468,7 +1478,7 @@ function Show_Reports() {
 							$report_page_html .= '<center>Transactions since '.date('Y-m-d H:i:s', $report_cutoff_timestamp).'</center>';
 							$report_page_html .= '<center>Contribution Percentage: <form action="index.php" method="post" name="contribution_percentage_frm" style="display: inline-block;">'.common_form_elements().'<input type="text" name="contribution_percentage" value="'.$contribution_percentage.'" size="1" style="text-align:center;" />%&nbsp;<input type="hidden" name="campaign_id" value="'.$campaign_id.'" /><input type="hidden" name="action" value="reports" border="0"><input type="hidden" name="sub_action" value="set_contribution_percentage" border="0"><input type="submit" value="Set" /></form></center>';
 							$report_page_html .= '<center><strong>Total: </strong>$'.number_format($total_spent, 2).'</center>';
-							$report_page_html .= '<center><strong>Week '.date('W').' Invoice Amount: </strong>$'.number_format($invoice_amount, 2).'<center>';
+							$report_page_html .= '<center><strong>Current Invoice Amount: </strong>$'.number_format($invoice_amount, 2).'<center>';
 						}
 						
 						$report_page_html .= '<table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin-top:10px;">';
