@@ -1270,7 +1270,7 @@ function Show_Reports() {
 				}
 			}
 			$db = new MyDB();
-			$db->exec('CREATE TABLE campaign_contribution_percentage (campaign_id varchar(50) NOT NULL, contribution_percentage int(11) DEFAULT NULL, PRIMARY KEY (campaign_id))');		
+			$db->exec('CREATE TABLE IF NOT EXISTS `campaign_contribution_percentage`(campaign_id varchar(50) NOT NULL, contribution_percentage int(11) DEFAULT NULL, PRIMARY KEY (campaign_id))');		
 			if(isset($campaign_list_array['campaigns']['campaign'][0]))
 			{
 				$c=0;
@@ -1285,7 +1285,7 @@ function Show_Reports() {
 							{
 								$campaign_id = $key;
 							}
-							$db->exec("INSERT INTO campaign_contribution_percentage (campaign_id, contribution_percentage) VALUES ('".$single_camp['id']."', ".$contribution_percentage.")");
+							$db->exec("INSERT OR REPLACE INTO campaign_contribution_percentage (campaign_id, contribution_percentage) VALUES ('".$single_camp['id']."', ".$contribution_percentage.")");
 							$c++;	
 						}
 					}
@@ -1320,6 +1320,7 @@ function Show_Reports() {
 			}
 			
 			
+			
 			list($campaign_customers_array_raw, $campaign_id_new) = get_campaign_transactions($campaign_list_array, $campaign_id, '2013-09-23');
 			$campaign_customers_array = build_campaign_transactions_array($campaign_customers_array_raw, $default_contribution_percentage, $contribution_percentage_array, $report_cutoff_timestamp);
 			
@@ -1330,7 +1331,7 @@ function Show_Reports() {
 			/*$curr_date = date('Y-m-d H:i:s', mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y')));
 			$report_page_html .= $curr_date;*/
 			
-			$query = $db->exec('CREATE TABLE report_time (`id` int(11) NOT NULL, cut_off_time varchar(50) DEFAULT NULL, PRIMARY KEY (`id`))');
+			$query = $db->exec('CREATE TABLE IF NOT EXISTS `report_time`(`id` int(11) NOT NULL, cut_off_time varchar(50) DEFAULT NULL, PRIMARY KEY (`id`))');
 			//$query = $db->exec("UPDATE report_time SET cut_off_time = '".date('Y-m-d H:i:s', mktime(date('H'), date('i')-10, date('s'), date('m'), date('d'), date('Y')))."'");
 			if($sub_action == 'run_reports')
 			{
