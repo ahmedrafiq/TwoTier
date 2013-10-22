@@ -1168,7 +1168,7 @@ function get_campaign_transactions($campaign_list_array, $campaign_id, $start_da
 	{
 		if($show_master_campaign == false)
 		{
-			$c=0;
+			$c = 0;
 			foreach($campaign_list_array['campaigns']['campaign'] as $single_camp) 
 			{
 				if($campaigns_to_be_excluded!='' and strstr($campaigns_to_be_excluded, $single_camp['id'])==false)
@@ -1177,7 +1177,7 @@ function get_campaign_transactions($campaign_list_array, $campaign_id, $start_da
 					{
 						$key = $single_camp['id'];
 						$campaign_transactions[$key] = $single_camp;
-						if($c==0 and $campaign_id=='')
+						if($c == 0 and $campaign_id == '')
 						{
 							$campaign_id = $key;
 						}
@@ -1229,7 +1229,7 @@ function get_campaign_transactions($campaign_list_array, $campaign_id, $start_da
 					}
 				}
 			} else {
-				if($cust_transac['transaction']['amount_number'] >= 0)
+				if(isset($cust_transac['transaction']['amount_number']) and $cust_transac['transaction']['amount_number'] >= 0)
 				{
 					$campaign_transactions[$cid]['transactions'][] = $cust_transac['transaction'];
 				}
@@ -1312,15 +1312,26 @@ function build_campaign_transactions_array($campaign_transactions, $default_perc
 				$customer_code_key = $curr_transaction['code'];
 				$campaign_transactions_array[$cid]['customers'][$customer_code_key] = $curr_transaction['customer'];
 				
-				$amount = $curr_transaction['original_amount'];
+				$amount = 0;
+				
+				$utility_field = isset($curr_transaction['custom1']) ? $curr_transaction['custom1'] : $curr_transaction['first_name'];
+				
+				if(isset($curr_transaction['original_amount']) and !empty($curr_transaction['original_amount']))
+				{
+					$total_spent = $total_spent + (float)$curr_transaction['original_amount'];
+					$amount = (float) $curr_transaction['original_amount'];
+					
+					
+				} elseif($curr_transaction['amount_type'] == '$' and isset($curr_transaction['amount_number'])) {
+					$total_spent = $total_spent + (float)$curr_transaction['amount_number'];
+					$amount = (float) $curr_transaction['amount_number'];
+				}
+				
 				if($show_master_campaign)
 				{
 					$amount = $curr_transaction['amount_number'];
 				}
 				
-				$utility_field = isset($curr_transaction['custom1']) ? $curr_transaction['custom1'] : $curr_transaction['first_name'];
-				
-				$total_spent = $total_spent + $curr_transaction['original_amount'];
 				$transactions_rows .= '<tr>';
 					$transactions_rows .= '<td>'.$curr_transaction['card_number'].'</td>';
 					$transactions_rows .= '<td>'.$utility_field.'</td>';
