@@ -1163,6 +1163,7 @@ function get_campaign_transactions($campaign_list_array, $campaign_id, $start_da
 {
 	$campaign_transactions = array();
 	$campaigns_to_be_excluded = $GLOBALS['custom_campaigns_excluded_ids'];
+	$consider_returned_purchases = $GLOBALS['consider_returned_purchases'];
 	
 	if(isset($campaign_list_array['campaigns']['campaign'][0]))
 	{
@@ -1223,16 +1224,33 @@ function get_campaign_transactions($campaign_list_array, $campaign_id, $start_da
 			{
 				foreach($cust_transac['transaction'] as $single_transaction)
 				{
-					if($single_transaction['amount_number'] >= 0)
+					if($consider_returned_purchases)
 					{
-						$campaign_transactions[$cid]['transactions'][] = $single_transaction;
+						if($single_transaction['amount_number'] != 0)
+						{
+							$campaign_transactions[$cid]['transactions'][] = $single_transaction;
+						}
+					} else {
+						if($single_transaction['amount_number'] >= 0)
+						{
+							$campaign_transactions[$cid]['transactions'][] = $single_transaction;
+						}
 					}
 				}
 			} else {
-				if(isset($cust_transac['transaction']['amount_number']) and $cust_transac['transaction']['amount_number'] >= 0)
+				if($consider_returned_purchases)
 				{
-					$campaign_transactions[$cid]['transactions'][] = $cust_transac['transaction'];
+					if(isset($cust_transac['transaction']['amount_number']) and $cust_transac['transaction']['amount_number'] != 0)
+					{
+						$campaign_transactions[$cid]['transactions'][] = $cust_transac['transaction'];
+					}
+				} else {
+					if(isset($cust_transac['transaction']['amount_number']) and $cust_transac['transaction']['amount_number'] >= 0)
+					{
+						$campaign_transactions[$cid]['transactions'][] = $cust_transac['transaction'];
+					}
 				}
+				
 			}
 		}
 	}	
